@@ -1,11 +1,22 @@
+// imports function createComponent() defined in ../mini/component.js
 import { createComponent } from '../mini';
+
+/* provides access to propeties of Proxy object 'connect' constructed by
+  'store' object constructor function 'connect' defined in ../mini/store.js */
 import { connect } from '../store';
+
+// imports object contructor function Word() defined in ../components/char.js
 import { Word } from './word';
 
+// object constructor function for Rebus
 export function Rebus(props, ...children) {
+  /* object constructor of 'connect' taking child components
+  as arguments to update the initialized state values of the 'store' component */
   return connect(
     createComponent({
+      // object containing properties passed by parent component 'rebus' in ../components/rebus.js
       props,
+      // an array object to contain child objects of 'rebus' object
       children,
       componentDidMount() {
         const rebus = this.props.rebuses[this.props.current];
@@ -31,6 +42,10 @@ export function Rebus(props, ...children) {
       },
       render({ current, rebuses, animation }) {
         const rebus = rebuses[current];
+        /* creates and adds child objects to its own 'children' property
+        using the 'words' property value of the 'rebus' object defined,
+        and passing the 'current', 'rebuses', and 'animation' property values referencing
+        the 'connect' object */
         this.children = rebus.words.map((word, wordIndex) =>
           Word({ word, wordIndex, current, rebuses, charInput: props.charInput })
         );

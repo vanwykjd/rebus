@@ -1,8 +1,13 @@
+// imports function createComponent() defined in ../mini/component.js
 import { createComponent } from '../mini';
 
+// object constructor function for Char
 export function Char(props) {
   return createComponent({
+    // object containing properties passed by parent component 'rebus' in ../components/rebus.js
     props,
+    /* uses the 'current', 'rebuses', 'wordIndex' and 'charIndex' property values
+       passed by 'props' argument given in 'word' component to consruct the Char object */
     render({ current, rebuses, wordIndex, charIndex }) {
       const rebus = rebuses[current];
       const previousWords = rebus.words.slice(0, wordIndex).join('');
